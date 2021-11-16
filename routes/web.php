@@ -1,6 +1,9 @@
 <?php
 
+use App\Http\Controllers\ReplyController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ThreadController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,3 +19,14 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+Auth::routes();
+
+Route::get('/threads', [ThreadController::class, 'index']);
+Route::get('/threads/create', [ThreadController::class, 'create']);
+Route::get('/threads/{channel}/{thread}', [ThreadController::class,'show']);
+Route::post('/threads', [ThreadController::class, 'store'])->name('threads.store');
+Route::post('/threads/{channel}/{thread}/reply', [ReplyController::class, 'store']);
+
+
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
