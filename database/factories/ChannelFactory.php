@@ -13,7 +13,7 @@ class ChannelFactory extends Factory
      */
     public function definition()
     {
-        $name = $this->faker->word();
+        $name = sprintf($this->faker->word());
         return [
             'name' => $name,
             'slug' => $name

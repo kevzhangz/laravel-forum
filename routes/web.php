@@ -21,10 +21,11 @@ Route::get('/', function () {
 });
 Auth::routes();
 
-Route::get('/threads', [ThreadController::class, 'index']);
+Route::get('/threads', [ThreadController::class, 'index'])->name('threads.index');
 Route::get('/threads/create', [ThreadController::class, 'create']);
 Route::get('/threads/{channel}/{thread}', [ThreadController::class,'show']);
 Route::post('/threads', [ThreadController::class, 'store'])->name('threads.store');
+Route::get('/threads/{channel}', [ThreadController::class, 'index']);
 Route::post('/threads/{channel}/{thread}/reply', [ReplyController::class, 'store']);
 
 

@@ -8,15 +8,20 @@
                 <div class="card-header">{{ __('Dashboard') }}</div>
                 <div class="card-body">
                     @foreach($threads as $thread)
-                        <article>
-                            <h4>
+                        <article class="mb-4">
+                            <div class="d-flex align-items-center mb-1">
+                                <h4 class="flex-grow-1">
+                                    <a href="/threads/{{ $thread->channel->slug }}/{{ $thread->id }}">
+                                        {{ $thread->title }}
+                                    </a>
+                                </h4>
                                 <a href="/threads/{{ $thread->channel->slug }}/{{ $thread->id }}">
-                                    {{ $thread->title }}
+                                    <strong>{{ $thread->replies_count }} {{ Str::plural('reply', $thread->replies_count) }}</strong>
                                 </a>
-                            </h4>
+                            </div>
                             <div class="body">{{ $thread->body }}</div>
+                            <hr>
                         </article>
-                        <hr>
                     @endforeach
                 </div>
             </div>
