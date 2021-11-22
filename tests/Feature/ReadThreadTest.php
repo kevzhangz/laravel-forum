@@ -41,8 +41,16 @@ class ReadThreadTest extends TestCase
     /** @test */
     public function a_user_can_filter_threads_by_popularity()
     {
-        Thread::factory(3)->each(function ($thread) {
-            Reply::factory(mt_rand(0,5), ['thread_id' => $thread->id]);
-        });
+        $threadWithTwoReplies = create(Thread::class);
+        create(Reply::class, ['thread_id' => $threadWithTwoReplies->id], 2);
+
+        $threadWithThreeReplies = create(Thread::class);
+        create(Reply::class, ['thread_id' => $threadWithThreeReplies->id], 3);
+
+        $threadWithNoReplies = create(Thread::class);
+
+        $response = $this->get('/threads?popular=1');
+
+        $response->assertSeeTextInOrder(['3 replies','2 replies', '0 replies']);
     }
 }

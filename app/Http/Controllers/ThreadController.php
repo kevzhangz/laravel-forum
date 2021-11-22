@@ -31,6 +31,10 @@ class ThreadController extends Controller
             $user = User::where('name', $username)->firstOrFail();
 
             $threads = $threads->where('user_id', $user->id);
+        } elseif( request('popular')) {
+            $threads->getQuery()->orders = [];
+            
+            $threads = $threads->orderBy('replies_count', 'desc');
         }
 
         $threads = $threads->get();

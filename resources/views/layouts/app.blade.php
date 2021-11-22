@@ -40,6 +40,7 @@
                                 @if(auth()->check())
                                 <li><a href="/threads?by={{ auth()->user()->name }}" class="nav-link">My Threads</a></li>
                                 @endif
+                                <li><a href="/threads?popular=1" class="nav-link">Popular Threads</a></li>
                             </ul>
                         </li>
                         <li><a href="/threads/create" class="nav-link">New Thread</a></li>
